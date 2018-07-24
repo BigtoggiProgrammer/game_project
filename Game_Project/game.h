@@ -22,5 +22,6 @@ void gloop(int);
 void mov(int*,int*,int,int);
 void drawUI(int*,int*);
 int iseat(int,int);
+int iscoin(int,int);
 int isend(int,int);
 int StoreDraw();

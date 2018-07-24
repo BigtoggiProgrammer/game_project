@@ -17,14 +17,14 @@ void Process(){
 
             if(n == 0)
             {
-                //printf("ì‰¬ì›€ ì„ íƒí•¨");
+                //printf("½¬¿ò ¼±ÅÃÇÔ");
                 //Sleep(1000);
                 gloop(0);
                 //DrawMap(&x,&y);
             }
             if(n == 1)
             {
-                //printf("ì–´ë ¤ì›€ ì„ íƒí•¨");
+                //printf("¾î·Á¿ò ¼±ÅÃÇÔ");
                 gloop(1);
                 //Sleep(1000);
             }
@@ -43,7 +43,6 @@ void Process(){
         SetColor(white,black);
     }
 }
-
 
 int main()
 {

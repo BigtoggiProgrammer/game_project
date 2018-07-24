@@ -12,4 +12,11 @@
 #define __CONIO_H__
 #include <conio.h>
 #endif // __CONIO_H__
-
+//#include <bits/stdc++.h>
+#if 0
+#ifndef __RAND_H__
+#define __RAND_H__
+#include <random>
+#include <time.h>
+#endif // __RAND_H__
+#endif
