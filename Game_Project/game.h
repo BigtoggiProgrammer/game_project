@@ -29,3 +29,4 @@ void StoreDraw();
 int OpenFile();
 void Seting_item_coin(int);
 void CloseFile();
+int inzuap(int,int,int);

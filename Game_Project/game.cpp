@@ -1,11 +1,7 @@
 #include "game.h"
 
-<<<<<<< HEAD
 int item,coin;
-=======
-int item = 0,coin = 0;
->>>>>>> 16425bdfac812294bef6dc01da1cf842dc943c0b
-
+int Wh,wh;
 
 // s : 시작지점
 // 1 : 블럭
@@ -50,18 +46,21 @@ char Map3[14][61] = {
     {"11111111111111111111111111111111111111111111111111111111"},
     {"1000100s100010001000000000001100000000000000011100001111"},
     {"10111010101010101111111111111101111111111111010101101111"},
-    {"100011001+0000100010000001000100010001000100010001100001"},
+    {"100011001+0000100010000001000100010001000400040001100001"},
     {"11101101111110101010111101010001000101101110101111111101"},
     {"10001100001010101010101001110111110001001000001000001101"},
-    {"10111101101010101010001111010100011011101111111110111101"},
-    {"10100000101010101010100000010101001010100000001000110011"},
+    {"10111101101010101010001111040100011011101111111110141101"},
+    {"10100000101010101010100000010101001010100000001000110041"},
     {"10111010101010101000111111110001001010110111100100100001"},
-    {"10000+101010101011111000000001111010100000001011+0111011"},
-    {"111110101010001000010011011111001010001111100+q+00111001"},
+    {"10000+101010101011111000000001111010100000001611+0641011"},
+    {"111110101010001000010011011111001010001111106+q+00144001"},
     {"10001010101111111101011000100010101111100001111110110101"},
-    {"1010001010000000000100001000100010100000110000+000010111"},
+    {"1010001010000000000100001000100010100000110000+000040111"},
     {"11111111111111111111111111111111111111111111111111111111"}
 };
+
+int fake[10005][2] = {{10,44},{9,45}};
+int nx[4] = {1,0,-1,0},ny[4] = {0,1,0,-1};
 
 int OpenFile()
 {
@@ -83,11 +82,11 @@ int OpenFile()
     SetColor(lightred,black);
     printf("> ");
     SetColor(white,black);
-    printf("열쇠: %02d개, 코인: %02d개",co1,it1);
+    printf("열쇠: %02d개, 코인: %02d개",it1,co1);
     go(x,y+1);
-    printf("열쇠: %02d개, 코인: %02d개",co2,it2);
+    printf("열쇠: %02d개, 코인: %02d개",it2,co2);
     go(x,y+2);
-    printf("열쇠: %02d개, 코인: %02d개",co3,it3);
+    printf("열쇠: %02d개, 코인: %02d개",it3,co3);
     while(1)
     {
         int n = KeyControl();
@@ -136,6 +135,7 @@ int OpenFile()
 
             case SPACE :
             {
+                Wh = y-8;
                 if(y-8 == 0) return it1*10000+co1;
                 if(y-8 == 1) return it2*10000+co2;
                 if(y-8 == 2) return it3*10000+co3;
@@ -157,7 +157,21 @@ void CloseFile()
 {
     FILE *fp;
     fp = fopen("input.txt","w");
-    fprintf(fp,"%d %d",item,coin);
+    if(Wh == 0)
+    {
+        fp = fopen("data1.txt","w");
+        fprintf(fp,"%d %d",item,coin);
+    }
+    if(Wh == 1)
+    {
+        fp = fopen("data2.txt","w");
+        fprintf(fp,"%d %d",item,coin);
+    }
+    if(Wh == 2)
+    {
+        fp = fopen("data3.txt","w");
+        fprintf(fp,"%d %d",item,coin);
+    }
     fclose(fp);
 }
 
@@ -207,10 +221,10 @@ int MenuDraw(){
                 {
                     go(x-2,y);
                     printf(" ");
-                    //go(x,y);
-                    //printf(" ");
-                    //go(x+9,y);
-                    //printf(" ");
+                    go(x,y);
+                    printf(" ");
+                    go(x+9,y);
+                    printf(" ");
                     go(x-2,--y);
                     SetColor(lightred,black);
                     printf(">");
@@ -334,7 +348,7 @@ void DrawMap(int *x,int *y){
         for(j = 0;j < 61;j++)
         {
             char tmp = tm[i][j];
-            if(tmp == '0')
+            if(tmp == '0'||tmp == '6')
             {
                 SetColor(black,black);
                 printf(" ");
@@ -394,6 +408,7 @@ void gloop(int mc){
     if(mc == 2)
     {
         memcpy(tm,Map3,sizeof(tm));
+        wh = 1;
     }
     long long int *temp1,*temp2;
     do
@@ -409,7 +424,6 @@ void gloop(int mc){
     //y = 11;ss
     while(pl)
     {
-
         drawUI(&x,&y);
         switch(KeyControl())
         {
@@ -444,6 +458,17 @@ void gloop(int mc){
                     break;
                 }
                 mov(&x,&y,0,-1);
+                for(int i = 0;i < 2;i++)
+                {
+                    if(wh&&inzuap(x,y,i))
+                    {
+                        tm[fake[i][0]][fake[i][1]] = '1';
+                        go(fake[i][1],fake[i][0]);
+                        SetColor(white,white);
+                        printf("#");
+                        //SetColor()
+                    }
+                }
                 break;
             }
             case D :
@@ -477,6 +502,18 @@ void gloop(int mc){
                     break;
                 }
                 mov(&x,&y,0,1);
+
+                for(int i = 0;i < 2;i++)
+                {
+                    if(wh&&inzuap(x,y,i))
+                    {
+                        tm[fake[i][0]][fake[i][1]] = '1';
+                        go(fake[i][1],fake[i][0]);
+                        SetColor(white,white);
+                        printf("#");
+                        //SetColor()
+                    }
+                }
                 break;
             }
             case R :
@@ -510,6 +547,17 @@ void gloop(int mc){
                     break;
                 }
                 mov(&x,&y,1,0);
+                for(int i = 0;i < 2;i++)
+                {
+                    if(wh&&inzuap(x,y,i))
+                    {
+                        tm[fake[i][0]][fake[i][1]] = '1';
+                        go(fake[i][1],fake[i][0]);
+                        SetColor(white,white);
+                        printf("#");
+                        //SetColor()
+                    }
+                }
                 break;
             }
             case L :
@@ -542,6 +590,17 @@ void gloop(int mc){
                     break;
                 }
                 mov(&x,&y,-1,0);
+                for(int i = 0;i < 2;i++)
+                {
+                    if(wh&&inzuap(x,y,i))
+                    {
+                        tm[fake[i][0]][fake[i][1]] = '1';
+                        go(fake[i][1],fake[i][0]);
+                        SetColor(white,white);
+                        printf("#");
+                        //SetColor()
+                    }
+                }
                 break;
             }
             case SPACE :
@@ -678,4 +737,13 @@ void StoreDraw()
             }
         }
     }
+}
+
+int inzuap(int y,int x,int k)
+{
+    for(int i = 0;i < 4;i++)
+    {
+        if(x+nx[i] == fake[k][0]&&y+ny[i] == fake[k][1]) return 1;
+    }
+    return 0;
 }
