@@ -9,6 +9,7 @@
 #define L 2
 #define R 3
 #define SPACE 4
+#define BUY 5
 
 #endif // KEY_CODE
 
@@ -24,4 +25,4 @@ void drawUI(int*,int*);
 int iseat(int,int);
 int iscoin(int,int);
 int isend(int,int);
-int StoreDraw();
+void StoreDraw();
