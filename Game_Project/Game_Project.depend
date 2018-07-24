@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1532427958 source:c:\users\user\desktop\jungol\game_project\game.cpp
+	"game.h"
+
+1532426957 c:\users\user\desktop\jungol\game_project\game.h
+	"main.h"
+	"util.h"
+
+1532353372 c:\users\user\desktop\jungol\game_project\main.h
+	<stdio.h>
+	<windows.h>
+	<conio.h>
+
+1532355335 c:\users\user\desktop\jungol\game_project\util.h
+	"main.h"
+
+1532427689 source:c:\users\user\desktop\jungol\game_project\main.cpp
+	"main.h"
+	"util.h"
+	"game.h"
+
+1532359695 source:c:\users\user\desktop\jungol\game_project\util.cpp
+	"util.h"
+
