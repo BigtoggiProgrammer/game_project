@@ -1,6 +1,6 @@
 #ifndef __STDIO_H__
 #define __STDIO_H__
-#include <stdio.h>
+#include <bits/stdc++.h>
 #endif // __STDIO_H__
 
 #ifndef __WINDOWS_H__

@@ -25,7 +25,11 @@ void Process(){
         {
             StoreDraw();
         }
-        if(MenuCode == 3) return;
+        if(MenuCode == 3)
+        {
+            CloseFile();
+            return;
+        }
         system("cls");
         SetColor(white,black);
     }
@@ -34,6 +38,7 @@ void Process(){
 int main()
 {
     seting();
+    Seting_item_coin(OpenFile());
     Beep(2000,300);
     Process();
     return 0;

@@ -26,3 +26,6 @@ int iseat(int,int);
 int iscoin(int,int);
 int isend(int,int);
 void StoreDraw();
+int OpenFile();
+void Seting_item_coin(int);
+void CloseFile();

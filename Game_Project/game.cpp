@@ -1,6 +1,6 @@
 #include "game.h"
 
-int item = 0,coin = 1;
+int item,coin;
 
 char Map[14][61] = {
     {"11111111111111111111111111111111111111111111111111111111"},
@@ -53,6 +53,104 @@ char Map3[14][61] = {
     {"1111111111111111111111111111111111111111111111111111111"}
 };
 
+int OpenFile()
+{
+    int it1,co1,it2,co2,it3,co3;
+    FILE *fp;
+    fp = fopen("data1.txt","r");
+    fscanf(fp,"%d %d", &it1, &co1);
+    fclose(fp);
+    fp = fopen("data2.txt","r");
+    fscanf(fp,"%d %d", &it2, &co2);
+    fclose(fp);
+    fp = fopen("data3.txt","r");
+    fscanf(fp,"%d %d", &it3, &co3);
+    int x = 17,y = 8;
+    go(x-6,y-4);
+    SetColor(white,black);
+    printf("원하는 세이브 파일에 들어가 주십시오.");
+    go(x-2,y);
+    SetColor(lightred,black);
+    printf("> ");
+    SetColor(white,black);
+    printf("열쇠: %02d개, 코인: %02d개",co1,it1);
+    go(x,y+1);
+    printf("열쇠: %02d개, 코인: %02d개",co2,it2);
+    go(x,y+2);
+    printf("열쇠: %02d개, 코인: %02d개",co3,it3);
+    while(1)
+    {
+        int n = KeyControl();
+        switch(n)
+        {
+            case U :
+            {
+                if(y > 8)
+                {
+                    go(x-2,y);
+                    printf(" ");
+                    //go(x,y);
+                    //printf(" ");
+                    //go(x+9,y);
+                    //printf(" ");
+                    go(x-2,--y);
+                    SetColor(lightred,black);
+                    printf(">");
+                    //go(x,y);
+                    //printf("[");
+                    //go(x+9,y);
+                    //printf("]");
+                }
+                break;
+            }
+            case D :
+            {
+                if(y < 10)
+                {
+                    go(x-2,y);
+                    printf(" ");
+                    //go(x,y);
+                    //printf(" ");
+                    //go(x+9,y);
+                    //printf(" ");
+                    go(x-2,++y);
+                    SetColor(lightred,black);
+                    printf(">");
+                    //go(x,y);
+                    //printf("[");
+                    //go(x+9,y);
+                    //printf("]");
+                }
+                break;
+            }
+
+            case SPACE :
+            {
+                if(y-8 == 0) return it1*10000+co1;
+                if(y-8 == 1) return it2*10000+co2;
+                if(y-8 == 2) return it3*10000+co3;
+                //return y-12;
+            }
+        }
+    }
+    fclose(fp);
+}
+
+void Seting_item_coin(int n)
+{
+    item = n/10000;
+    coin = n%10000;
+    system("cls");
+}
+
+void CloseFile()
+{
+    FILE *fp;
+    fp = fopen("input.txt","w");
+    fprintf(fp,"%d %d",item,coin);
+    fclose(fp);
+}
+
 void TitleDraw(){
     SetColor(white,black);
     printf("\n\n\n\n");
@@ -99,10 +197,10 @@ int MenuDraw(){
                 {
                     go(x-2,y);
                     printf(" ");
-                    go(x,y);
-                    printf(" ");
-                    go(x+9,y);
-                    printf(" ");
+                    //go(x,y);
+                    //printf(" ");
+                    //go(x+9,y);
+                    //printf(" ");
                     go(x-2,--y);
                     SetColor(lightred,black);
                     printf(">");
@@ -498,14 +596,14 @@ int isend(int x,int y)
 void StoreDraw()
 {
     system("cls");
-    int x = 22,y = 6;
+    int x = 20,y = 6;
     go(2,2);
     printf("코인: %02d개",coin);
     go(x-2,y);
-    printf("> 열쇠1개: 3개");
+    printf("> 열쇠1개: 코인3개");
     go(x,y+1);
-    printf("열쇠5개: 10개");
-    go(x-5,y+13);
+    printf("열쇠5개: 코인10개");
+    go(x-3,y+13);
     printf("구매하는 키는 b 입니다.");
     while(1)
     {
