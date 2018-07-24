@@ -177,8 +177,10 @@ int MapListDraw(){
     go(x-2,y);
     printf("> 쉬움");
     go(x,y+1);
-    printf("어려움");
+    printf("중간");
     go(x,y+2);
+    printf("어려움");
+    go(x,y+3);
     printf("뒤로");
     go(x-1,y);
     while(1){
@@ -196,7 +198,7 @@ int MapListDraw(){
             }
             case D :
             {
-                if(y < 8)
+                if(y < 9)
                 {
                     go(x-2,y);
                     printf(" ");
@@ -272,6 +274,7 @@ void DrawMap(int *x,int *y){
 void gloop(int mc){
     int x,y;
     int pl = 1;
+    item = 0;
     if(mc == 0)
     {
         memcpy(tm,Map,sizeof(tm));
@@ -279,6 +282,10 @@ void gloop(int mc){
     if(mc == 1)
     {
         memcpy(tm,Map2,sizeof(tm));
+    }
+    if(mc == 2)
+    {
+        memcpy(tm,Map3,sizeof(tm));
     }
     long long int *temp1,*temp2;
     do
