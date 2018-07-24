@@ -3,8 +3,6 @@
 #include "game.h"
 using namespace std;
 
-
-
 void Process(){
     int x = 2,y = 2;
     while(1)
@@ -16,20 +14,7 @@ void Process(){
         {
             //GameStart
             int n = MapListDraw();
-
-            if(n == 0)
-            {
-                //printf("쉬움 선택함");
-                //Sleep(1000);
-                gloop(0);
-                //DrawMap(&x,&y);
-            }
-            if(n == 1)
-            {
-                //printf("어려움 선택함");
-                gloop(1);
-                //Sleep(1000);
-            }
+            gloop(n);
         }
         if(MenuCode == 1)
         {
