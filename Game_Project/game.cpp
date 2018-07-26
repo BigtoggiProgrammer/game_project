@@ -175,6 +175,7 @@ void CloseFile()
     fclose(fp);
 }
 
+#if 0
 void TitleDraw(){
     SetColor(white,black);
     printf("\n\n\n\n");
@@ -188,6 +189,38 @@ void TitleDraw(){
     Sleep(300);
     printf("        #####   ####    ###  #   #  #      ##### \n");
     Sleep(300);
+}
+#endif
+
+void TitleDraw(){
+    int ox = 2,oy = 2;
+	
+    SetColor(white,black);
+    printf("\n\n\n\n");
+    printf("        #####    ###    ###    #    ####   ##### \n");
+    Sleep(300);
+    printf("        #       #      #      # #   #   #  #     \n");
+    Sleep(300);
+    printf("        ####    ####   #     #####  ####   ####  \n");
+    Sleep(300);
+    printf("        #           #  #     #   #  #      #     \n");
+    Sleep(300);
+    printf("        #####   ####    ###  #   #  #      ##### \n");
+    Sleep(300);
+
+    go(ox, oy);
+    for(int i = 1; i<11; i++)
+    {
+    	SetColor(i,black);	 
+    printf("\n\n\n\n");
+    printf("        #####    ###    ###    #    ####   ##### \n");
+    printf("        #       #      #      # #   #   #  #     \n");
+    printf("        ####    ####   #     #####  ####   ####  \n");
+    printf("        #           #  #     #   #  #      #     \n");
+    printf("        #####   ####    ###  #   #  #      ##### \n");
+    Sleep(100);	
+    }
+	
 }
 
 int MenuDraw(){
