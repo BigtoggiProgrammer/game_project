@@ -4,12 +4,15 @@
 #ifndef KEY_CODE
 #define KEY_CODE
 
-#define U 0
-#define D 1
-#define L 2
-#define R 3
-#define SPACE 4
-#define BUY 5
+// 2018-07-26 : 김재성 : 키 Define 변경
+#define NO_KEY	0
+#define U 1
+#define D 2
+#define L 3
+#define R 4
+#define SPACE 5
+#define BUY 6
+
 
 #endif // KEY_CODE
 
