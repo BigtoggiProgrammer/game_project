@@ -3,11 +3,11 @@
 int item,coin;
 int Wh,wh;
 
-// s : ½ÃÀÛÁöÁ¡
-// 1 : ºí·°
-// 0 : ±æ
-// + : Àåº®
-// q : ¸ñÇ¥¹°
+// s : ì‹œì‘ì§€ì 
+// 1 : ë¸”ëŸ­
+// 0 : ê¸¸
+// + : ì¥ë²½
+// q : ëª©í‘œë¬¼
 char Map[14][61] = {
     {"11111111111111111111111111111111111111111111111111111111"},
     {"10000000000000000000000000000000000000000000000000000001"},
@@ -77,16 +77,16 @@ int OpenFile()
     int x = 17,y = 8;
     go(x-6,y-4);
     SetColor(white,black);
-    printf("¿øÇÏ´Â ¼¼ÀÌºê ÆÄÀÏ¿¡ µé¾î°¡ ÁÖ½Ê½Ã¿À.");
+    printf("ì›í•˜ëŠ” ì„¸ì´ë¸Œ íŒŒì¼ì— ë“¤ì–´ê°€ ì£¼ì‹­ì‹œì˜¤.");
     go(x-2,y);
     SetColor(lightred,black);
     printf("> ");
     SetColor(white,black);
-    printf("¿­¼è: %02d°³, ÄÚÀÎ: %02d°³",it1,co1);
+    printf("ì—´ì‡ : %02dê°œ, ì½”ì¸: %02dê°œ",it1,co1);
     go(x,y+1);
-    printf("¿­¼è: %02d°³, ÄÚÀÎ: %02d°³",it2,co2);
+    printf("ì—´ì‡ : %02dê°œ, ì½”ì¸: %02dê°œ",it2,co2);
     go(x,y+2);
-    printf("¿­¼è: %02d°³, ÄÚÀÎ: %02d°³",it3,co3);
+    printf("ì—´ì‡ : %02dê°œ, ì½”ì¸: %02dê°œ",it3,co3);
     while(1)
     {
         int n = KeyControl();
@@ -197,19 +197,19 @@ int MenuDraw(){
     SetColor(lightred,black);
     printf("> [");
     SetColor(white,black);
-    printf("°ÔÀÓ½ÃÀÛ");
+    printf("ê²Œì„ì‹œì‘");
     SetColor(lightred,black);
     printf("]");
     SetColor(white,black);
     Sleep(300);
     go(x,y+1);
-    printf(" °ÔÀÓÁ¤º¸ ");
+    printf(" ê²Œì„ì •ë³´ ");
     Sleep(300);
     go(x,y+2);
-    printf(" »ó    Á¡ ");
+    printf(" ìƒ    ì  ");
     Sleep(300);
     go(x,y+3);
-    printf(" Á¾    ·á ");
+    printf(" ì¢…    ë£Œ ");
     while(1)
     {
         int n = KeyControl();
@@ -263,6 +263,8 @@ int MenuDraw(){
         }
     }
 }
+
+#if 0
 int KeyControl(){
     char tmp = getch();
     if(tmp == 'w'||tmp == 'W') return U;
@@ -273,14 +275,40 @@ int KeyControl(){
     if(tmp == '_') return -1;
     if(tmp == ' ') return SPACE;
 }
+#endif
+
+int KeyControl(){
+
+    int key = getch();
+    if((key == 224) || (key == 0))  // ë°©í–¥í‚¤ ì´ë©´
+    {
+    	key = getch();
+	switch(key)
+	{
+		case 72: return U;
+		case 75: return L;
+		case 77: return R;
+		case 80: return D;
+		default : return NO_KEY;  // ì •ì˜ ë˜ì§€ ì•Šì€ í‚¤ ëˆŒë¦¼
+	}
+    }
+    else
+    {
+    	if(key == 'b'||key == 'B') return BUY;
+    	if(key == '_') return -1;
+    	if(key == ' ') return SPACE;
+	    else return NO_KEY;  // ì •ì˜ë˜ì§€ ì•Šì€ í‚¤ ëˆŒë¦¼
+    }	
+}
+
 void InfoDraw(){
     system("cls");
     printf("\n\n");
-    printf("                       [ Á¶ÀÛ¹ı ]\n\n");
-    printf("                   ÀÌµ¿ : W, A, S, D\n");
-    printf("                   ¼±ÅÃ : ½ºÆäÀÌ½º¹Ù \n\n\n\n\n\n\n");
-    printf("                °³¹ßÀÚ : ±è°Ç¿ì,±èÀç¼º        \n\n");
-    printf("      ½ºÆäÀÌ½º¹Ù¸¦ ´©¸£¸é ¸ŞÀÎÈ­¸éÀ¸·Î ÀÌµ¿ÇÕ´Ï´Ù .");
+    printf("                       [ ì¡°ì‘ë²• ]\n\n");
+    printf("                   ì´ë™ : W, A, S, D\n");
+    printf("                   ì„ íƒ : ìŠ¤í˜ì´ìŠ¤ë°” \n\n\n\n\n\n\n");
+    printf("                ê°œë°œì : ê¹€ê±´ìš°,ê¹€ì¬ì„±        \n\n");
+    printf("      ìŠ¤í˜ì´ìŠ¤ë°”ë¥¼ ëˆ„ë¥´ë©´ ë©”ì¸í™”ë©´ìœ¼ë¡œ ì´ë™í•©ë‹ˆë‹¤ .");
 
     while(1) {
         if(KeyControl() == SPACE)
@@ -295,16 +323,16 @@ int MapListDraw(){
     int y = 6;
     system("cls");
     printf("\n\n");
-    printf("                       [ ¸Ê ¼±ÅÃ ]\n\n");
+    printf("                       [ ë§µ ì„ íƒ ]\n\n");
 
     go(x-2,y);
-    printf("> ½¬¿ò");
+    printf("> ì‰¬ì›€");
     go(x,y+1);
-    printf("Áß°£");
+    printf("ì¤‘ê°„");
     go(x,y+2);
-    printf("¾î·Á¿ò");
+    printf("ì–´ë ¤ì›€");
     go(x,y+3);
-    printf("µÚ·Î");
+    printf("ë’¤ë¡œ");
     go(x-1,y);
     while(1){
         int n = KeyControl();
@@ -627,13 +655,13 @@ void mov(int *x,int *y,int _x,int _y){
 void drawUI(int *x,int *y){
     SetColor(white,black);
     go(3,16);
-    printf("À§Ä¡: %02d, %02d", *x, *y);
+    printf("ìœ„ì¹˜: %02d, %02d", *x, *y);
 
     SetColor(yellow,black);
     go(34,16);
-    printf("¿­¼è: %02d °³",item);
+    printf("ì—´ì‡ : %02d ê°œ",item);
     go(19,16);
-    printf("ÄÚÀÎ: %02d °³",coin);
+    printf("ì½”ì¸: %02d ê°œ",coin);
 }
 
 int iseat(int x,int y)
@@ -667,13 +695,13 @@ void StoreDraw()
     system("cls");
     int x = 20,y = 6;
     go(2,2);
-    printf("ÄÚÀÎ: %02d°³",coin);
+    printf("ì½”ì¸: %02dê°œ",coin);
     go(x-2,y);
-    printf("> ¿­¼è1°³: ÄÚÀÎ3°³");
+    printf("> ì—´ì‡ 1ê°œ: ì½”ì¸3ê°œ");
     go(x,y+1);
-    printf("¿­¼è5°³: ÄÚÀÎ10°³");
+    printf("ì—´ì‡ 5ê°œ: ì½”ì¸10ê°œ");
     go(x-3,y+13);
-    printf("±¸¸ÅÇÏ´Â Å°´Â b ÀÔ´Ï´Ù.");
+    printf("êµ¬ë§¤í•˜ëŠ” í‚¤ëŠ” b ì…ë‹ˆë‹¤.");
     while(1)
     {
         int n = KeyControl();
@@ -715,7 +743,7 @@ void StoreDraw()
                         coin -= 3;
                         Beep(2700,200);
                         go(2,2);
-                        printf("ÄÚÀÎ: %02d°³",coin);
+                        printf("ì½”ì¸: %02dê°œ",coin);
                     }
                 }
                 if(y-6 == 1)
@@ -726,7 +754,7 @@ void StoreDraw()
                         coin -= 10;
                         Beep(2700,200);
                         go(2,2);
-                        printf("ÄÚÀÎ: %02d°³",coin);
+                        printf("ì½”ì¸: %02dê°œ",coin);
                     }
                 }
                 break;
