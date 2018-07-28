@@ -32,8 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="data1.txt" />
+		<Unit filename="data2.txt" />
+		<Unit filename="data3.txt" />
 		<Unit filename="game.cpp" />
 		<Unit filename="game.h" />
+		<Unit filename="input.txt" />
 		<Unit filename="main.cpp" />
 		<Unit filename="main.h" />
 		<Unit filename="util.cpp" />

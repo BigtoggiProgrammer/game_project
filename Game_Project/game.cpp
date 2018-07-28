@@ -1,8 +1,8 @@
 #include "game.h"
-
+#include <iostream>
 int item,coin;
 int Wh,wh;
-
+//setlocale(LC_ALL,"korean");
 // s : 시작지점
 // 1 : 블럭
 // 0 : 길
@@ -64,6 +64,7 @@ int nx[4] = {1,0,-1,0},ny[4] = {0,1,0,-1};
 
 int OpenFile()
 {
+    setlocale(LC_ALL,"korean");
     int it1,co1,it2,co2,it3,co3;
     FILE *fp;
     fp = fopen("data1.txt","r");
@@ -77,16 +78,17 @@ int OpenFile()
     int x = 17,y = 8;
     go(x-6,y-4);
     SetColor(white,black);
-    printf("원하는 세이브 파일에 들어가 주십시오.");
+    wprintf(L"원하는 세이브 파일에 들어가 주십시오.");
+    //cout << "원하시는 세이브 파일에 들어가 주십시오." << "n" << flush;
     go(x-2,y);
     SetColor(lightred,black);
     printf("> ");
     SetColor(white,black);
-    printf("열쇠: %02d개, 코인: %02d개",it1,co1);
+    wprintf(L"열쇠: %02d개, 코인: %02d개",it1,co1);
     go(x,y+1);
-    printf("열쇠: %02d개, 코인: %02d개",it2,co2);
+    wprintf(L"열쇠: %02d개, 코인: %02d개",it2,co2);
     go(x,y+2);
-    printf("열쇠: %02d개, 코인: %02d개",it3,co3);
+    wprintf(L"열쇠: %02d개, 코인: %02d개",it3,co3);
     while(1)
     {
         int n = KeyControl();
@@ -194,7 +196,7 @@ void TitleDraw(){
 
 void TitleDraw(){
     int ox = 2,oy = 2;
-	
+
     SetColor(white,black);
     printf("\n\n\n\n");
     printf("        #####    ###    ###    #    ####   ##### \n");
@@ -208,41 +210,45 @@ void TitleDraw(){
     printf("        #####   ####    ###  #   #  #      ##### \n");
     Sleep(300);
 
-    go(ox, oy);
+    //go(ox, oy);
     for(int i = 1; i<11; i++)
     {
-    	SetColor(i,black);	 
+        go(ox,oy-2);
+    	SetColor(i,black);
     printf("\n\n\n\n");
     printf("        #####    ###    ###    #    ####   ##### \n");
     printf("        #       #      #      # #   #   #  #     \n");
     printf("        ####    ####   #     #####  ####   ####  \n");
     printf("        #           #  #     #   #  #      #     \n");
     printf("        #####   ####    ###  #   #  #      ##### \n");
-    Sleep(100);	
+    Sleep(100);
+
     }
-	
+
 }
 
 int MenuDraw(){
     //SetColor(white,black);
+    setlocale(LC_ALL, "korean");
     int x = 23,y = 12;
     go(x-2,y);
     SetColor(lightred,black);
     printf("> [");
     SetColor(white,black);
-    printf("게임시작");
+    wprintf(L"게임시작");
     SetColor(lightred,black);
     printf("]");
     SetColor(white,black);
     Sleep(300);
     go(x,y+1);
-    printf(" 게임정보 ");
+    wprintf(L" 게임정보 ");
     Sleep(300);
     go(x,y+2);
-    printf(" 상    점 ");
+    int ooooo;
+    wprintf(L" 상    점 ");
     Sleep(300);
     go(x,y+3);
-    printf(" 종    료 ");
+    wprintf(L" 종    료 ");
     while(1)
     {
         int n = KeyControl();
@@ -328,20 +334,21 @@ int KeyControl(){
     else
     {
     	if(key == 'b'||key == 'B') return BUY;
-    	if(key == '_') return -1;
+    	if(key == '_') return HID;
     	if(key == ' ') return SPACE;
 	    else return NO_KEY;  // 정의되지 않은 키 눌림
-    }	
+    }
 }
 
 void InfoDraw(){
     system("cls");
+    setlocale(LC_ALL,"korean");
     printf("\n\n");
-    printf("                       [ 조작법 ]\n\n");
-    printf("                   이동 : W, A, S, D\n");
-    printf("                   선택 : 스페이스바 \n\n\n\n\n\n\n");
-    printf("                개발자 : 김건우,김재성        \n\n");
-    printf("      스페이스바를 누르면 메인화면으로 이동합니다 .");
+    wprintf(L"                       [ 조작법 ]\n\n");
+    wprintf(L"                   이동 : W, A, S, D\n");
+    wprintf(L"                   선택 : 스페이스바 \n\n\n\n\n\n\n");
+    wprintf(L"                개발자 : 김건우,김재성        \n\n");
+    wprintf(L"      스페이스바를 누르면 메인화면으로 이동합니다 .");
 
     while(1) {
         if(KeyControl() == SPACE)
@@ -354,18 +361,20 @@ void InfoDraw(){
 int MapListDraw(){
     int x = 24;
     int y = 6;
+    setlocale(LC_ALL,"korean");
     system("cls");
     printf("\n\n");
-    printf("                       [ 맵 선택 ]\n\n");
-
+    SetColor(lightblue,black);
+    wprintf(L"                     [ 맵 선택 ]\n\n");
+    SetColor(white,black);
     go(x-2,y);
-    printf("> 쉬움");
+    wprintf(L"> 쉬움");
     go(x,y+1);
-    printf("중간");
+    wprintf(L"중간");
     go(x,y+2);
-    printf("어려움");
+    wprintf(L"어려움");
     go(x,y+3);
-    printf("뒤로");
+    wprintf(L"뒤로");
     go(x-1,y);
     while(1){
         int n = KeyControl();
@@ -687,14 +696,15 @@ void mov(int *x,int *y,int _x,int _y){
 
 void drawUI(int *x,int *y){
     SetColor(white,black);
+    setlocale(LC_ALL,"korean");
     go(3,16);
-    printf("위치: %02d, %02d", *x, *y);
+    wprintf(L"위치: %02d, %02d", *x, *y);
 
     SetColor(yellow,black);
     go(34,16);
-    printf("열쇠: %02d 개",item);
+    wprintf(L"열쇠: %02d 개",item);
     go(19,16);
-    printf("코인: %02d 개",coin);
+    wprintf(L"코인: %02d 개",coin);
 }
 
 int iseat(int x,int y)
@@ -726,23 +736,35 @@ int isend(int x,int y)
 void StoreDraw()
 {
     system("cls");
+    setlocale(LC_ALL,"korean");
     int x = 20,y = 6;
     go(2,2);
-    printf("코인: %02d개",coin);
+    SetColor(green,black);
+    wprintf(L"코인: %02d개",coin);
+    go(45,2);
+    wprintf(L"열쇠: %02d개",item);
     go(x-2,y);
-    printf("> 열쇠1개: 코인3개");
+    SetColor(red,black);
+    printf("> ");
+    SetColor(white,black);
+    wprintf(L"열쇠1개: 코인3개");
     go(x,y+1);
-    printf("열쇠5개: 코인10개");
+    wprintf(L"열쇠5개: 코인10개");
     go(x-3,y+13);
-    printf("구매하는 키는 b 입니다.");
+    SetColor(red,black);
+    wprintf(L"구매하는 키는 b 입니다.");
     while(1)
     {
         int n = KeyControl();
         switch(n)
         {
-            case -1 :
+            case HID :
             {
                 coin += 1000;
+                go(2,2);
+                SetColor(green,black);
+                wprintf(L"코인: %02d개",coin);
+                SetColor(red,black);
             }
             case U :
             {
@@ -776,7 +798,11 @@ void StoreDraw()
                         coin -= 3;
                         Beep(2700,200);
                         go(2,2);
-                        printf("코인: %02d개",coin);
+                        SetColor(green,black);
+                        wprintf(L"코인: %02d개",coin);
+                        go(45,2);
+                        wprintf(L"열쇠: %02d개",item);
+                        SetColor(red,black);
                     }
                 }
                 if(y-6 == 1)
@@ -787,7 +813,11 @@ void StoreDraw()
                         coin -= 10;
                         Beep(2700,200);
                         go(2,2);
-                        printf("코인: %02d개",coin);
+                        SetColor(green,black);
+                        wprintf(L"코인: %02d개",coin);
+                        go(45,2);
+                        wprintf(L"열쇠: %02d개",item);
+                        SetColor(red,black);
                     }
                 }
                 break;

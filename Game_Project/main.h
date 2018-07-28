@@ -1,6 +1,6 @@
-#ifndef __STDIO_H__
-#define __STDIO_H__
-#include <bits/stdc++.h>
+#ifndef __BITS/STDC++_H__
+#define __BITS/STDC++_H__
+#include <iostream>
 #endif // __STDIO_H__
 
 #ifndef __WINDOWS_H__
@@ -12,7 +12,7 @@
 #define __CONIO_H__
 #include <conio.h>
 #endif // __CONIO_H__
-//#include <bits/stdc++.h>
+#include <bits/stdc++.h>
 #if 0
 #ifndef __RAND_H__
 #define __RAND_H__
