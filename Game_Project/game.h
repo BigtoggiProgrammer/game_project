@@ -3,7 +3,6 @@
 
 #ifndef KEY_CODE
 #define KEY_CODE
-
 // 2018-07-26 : 김재성 : 키 Define 변경
 #define HID -1
 #define NO_KEY	0

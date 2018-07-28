@@ -1,5 +1,5 @@
 #include "util.h"
-
+//1
 void seting(){
 
     system("mode con cols=56 lines=20 | title Game ");
